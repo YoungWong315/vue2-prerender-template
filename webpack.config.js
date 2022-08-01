@@ -5,6 +5,8 @@ const PrerenderSPAPlugin = require('prerender-spa-plugin')
 const Renderer = PrerenderSPAPlugin.PuppeteerRenderer
 const VueLoaderPlugin = require('vue-loader/lib/plugin')
 
+const projectRootDir = path.resolve(__dirname)
+
 module.exports = {
   mode: process.env.NODE_ENV,
   entry: './src/main.js',
@@ -42,7 +44,8 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'vue$': 'vue/dist/vue.esm.js'
+      'vue$': 'vue/dist/vue.esm.js',
+      '@': path.resolve(projectRootDir, 'src'),
     }
   },
   devServer: {
@@ -52,8 +55,10 @@ module.exports = {
   devtool: '#eval-source-map',
   plugins: [
     new VueLoaderPlugin(),
+    new webpack.EnvironmentPlugin(['NODE_ENV']),
   ]
 }
+
 if (process.env.NODE_ENV === 'production') {
   module.exports.devtool = '#source-map'
   module.exports.plugins = (module.exports.plugins || []).concat([
