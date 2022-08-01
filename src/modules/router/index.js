@@ -1,13 +1,16 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
+import HomePage from '@/views/HomePage.vue'
+import AboutPage from '@/views/AboutPage.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
   {
     path: '/',
     name: 'HomePage',
-    component: () => import('@/views/HomePage.vue'),
+    component: HomePage,
     meta: {
       // keepAlive: true
     }
@@ -15,7 +18,7 @@ const routes = [
   {
     path: '/about',
     name: 'AboutPage',
-    component: () => import('@/views/AboutPage.vue'),
+    component: AboutPage,
     meta: {
       // keepAlive: true
     }
